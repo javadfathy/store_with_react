@@ -1,20 +1,38 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import withRouter from '../hoc/withRouter'
 import { Row, Col, Button, Image, ListGroup } from 'react-bootstrap'
 
-import products from '../products'
+// import products from '../products'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const Product = ({params}) => {
-    const product = products.find((item) => {
-        return item._id === +params.id
-    })
+    const [product, setProduct] = useState({})
+    const [colors, setColors] = useState('null')
 
-    const colors = product.colors.map((color) => {
-        return (<div className='color' style={{
-            backgroundColor: color
-        }}></div>)
-    })
+    useEffect(() => {
+        const sendRequest = async () => {
+            const res = await axios.get(`http://localhost:8000/api/products/${params.id}`)
+
+            setProduct(res.data)
+
+            setColors(res.data.colors.map((color) => {
+                console.log(color)
+                return (<div className='color' style={{
+                    backgroundColor: color
+                    
+                }}></div>)
+            }))
+        }
+
+        sendRequest()
+    }, [params])
+
+    // const product = products.find((item) => {
+    //     return item._id === +params.id
+    // })
+
+    
 
   return (
     <Row>
