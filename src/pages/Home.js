@@ -10,7 +10,7 @@ const Home = () => {
         {
             products.map((item) => {
                 return(
-                    <Col sm={12} md={6} lg={4} className='my-3'>
+                    <Col key={item._id} sm={12} md={6} lg={4} className='my-3'>
                         <Product product={item}/>
                     </Col>
                 )

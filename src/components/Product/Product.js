@@ -1,12 +1,13 @@
 import React from 'react'
 import { Card, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 const Product = ({ product }) => {
   return (
     <Card style={{ width: '100%' }}>
-        <a href={`/product/${product._id}`}><Card.Img variant="top" src={product.image} /></a>
+        <Link to={`/product/${product._id}`}><Card.Img variant="top" src={product.image} /></Link>
         <Card.Body>
-            <Card.Title>{product.name}</Card.Title>
+            <Link to={`/product/${product._id}`}><Card.Title>{product.name}</Card.Title></Link>
             <Card.Text>
                 {product.discription}
             </Card.Text>
